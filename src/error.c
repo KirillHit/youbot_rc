@@ -3,8 +3,8 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "error.h"
-#include "gui.h"
+#include "youbot_rc/error.h"
+#include "youbot_rc/gui.h"
 
 static int errcode; 
 static const char *errmsg;

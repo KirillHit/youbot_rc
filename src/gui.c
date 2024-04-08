@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "gui.h"
-#include "error.h"
+#include "youbot_rc/gui.h"
+#include "youbot_rc/error.h"
 
 #define NK_IMPLEMENTATION
-#include "nuklear.h"
+#include "youbot_rc/nuklear.h"
 #define NK_XLIB_IMPLEMENTATION
-#include "nuklear_xlib.h"
+#include "youbot_rc/nuklear_xlib.h"
 
 struct XWindow xw;
 int wnkheight;
@@ -92,7 +92,7 @@ struct nk_context *createctx() {
         XDefaultDepth(xw.dpy, xw.screen), InputOutput,
         xw.vis, CWEventMask|CWColormap, &xw.swa);
 
-    set_title(&xw, "ЁБОТ");
+    set_title(&xw, "Youbot remote control");
     XMapWindow(xw.dpy, xw.win);
     xw.wm_delete_window = XInternAtom(xw.dpy, "WM_DELETE_WINDOW", False);
     XSetWMProtocols(xw.dpy, xw.win, &xw.wm_delete_window, 1);
@@ -139,41 +139,41 @@ void gui(struct nk_context* ctx) {
         nk_menubar_begin(ctx);
         nk_layout_row_begin(ctx, NK_STATIC, ROWHEIGHT, 6);
         nk_layout_row_push(ctx, 80);
-        if (nk_menu_begin_label(ctx, "Кнопка 1", NK_TEXT_LEFT, nk_vec2(100, 40))){
+        if (nk_menu_begin_label(ctx, "Button 1", NK_TEXT_LEFT, nk_vec2(100, 40))){
             nk_layout_row_dynamic(ctx, 20, 1);
-            nk_menu_item_label(ctx, "Кнопка 1.1", NK_TEXT_LEFT);
+            nk_menu_item_label(ctx, "Button 1.1", NK_TEXT_LEFT);
             nk_menu_end(ctx);
         }
         
         nk_layout_row_push(ctx, 80);
-        if (nk_menu_begin_label(ctx, "Кнопка 2", NK_TEXT_LEFT, nk_vec2(100, 80))){
+        if (nk_menu_begin_label(ctx, "Button 2", NK_TEXT_LEFT, nk_vec2(100, 80))){
             nk_layout_row_dynamic(ctx, 20, 1);
-            nk_menu_item_label(ctx, "Кнопка 2.1", NK_TEXT_LEFT);
-            nk_menu_item_label(ctx, "Кнопка 2.2", NK_TEXT_LEFT);
+            nk_menu_item_label(ctx, "Button 2.1", NK_TEXT_LEFT);
+            nk_menu_item_label(ctx, "Button 2.2", NK_TEXT_LEFT);
             nk_menu_end(ctx);   
         }
         
         nk_layout_row_push(ctx, 80);
-        if (nk_menu_begin_label(ctx, "Кнопка 3", NK_TEXT_LEFT, nk_vec2(100, 40))){
+        if (nk_menu_begin_label(ctx, "Button 3", NK_TEXT_LEFT, nk_vec2(100, 40))){
              nk_layout_row_dynamic(ctx, 20, 1);
-             if (nk_menu_item_label(ctx, "Кнопка 3.1", NK_TEXT_LEFT));
+             if (nk_menu_item_label(ctx, "Button 3.1", NK_TEXT_LEFT));
             nk_menu_end(ctx);
         }
         
         nk_layout_row_push(ctx, 80);
-        if (nk_menu_begin_label(ctx, "Кнопка 4", NK_TEXT_LEFT, nk_vec2(100, 80))){
+        if (nk_menu_begin_label(ctx, "Button 4", NK_TEXT_LEFT, nk_vec2(100, 80))){
             nk_layout_row_dynamic(ctx, 20, 1);
-            nk_checkbox_label(ctx, "Чекбокс 1", &checkbox_1);
-            nk_checkbox_label(ctx, "Чекбокс 2", &checkbox_2);
-            nk_checkbox_label(ctx, "Чекбокс 3", &checkbox_3);
+            nk_checkbox_label(ctx, "Checkbox 1", &checkbox_1);
+            nk_checkbox_label(ctx, "Checkbox 2", &checkbox_2);
+            nk_checkbox_label(ctx, "Checkbox 3", &checkbox_3);
             nk_menu_end(ctx);
         }
         
         nk_layout_row_push(ctx, 80);
-        if (nk_menu_begin_label(ctx, "Кнопка 5", NK_TEXT_LEFT, nk_vec2(100, 80))){
+        if (nk_menu_begin_label(ctx, "Button 5", NK_TEXT_LEFT, nk_vec2(100, 80))){
             nk_layout_row_dynamic(ctx, 20, 1);
-            nk_menu_item_label(ctx, "Кнопка 5.1", NK_TEXT_LEFT);
-            nk_menu_item_label(ctx, "Кнопка 5.2", NK_TEXT_LEFT);
+            nk_menu_item_label(ctx, "Button 5.1", NK_TEXT_LEFT);
+            nk_menu_item_label(ctx, "Button 5.2", NK_TEXT_LEFT);
             nk_menu_end(ctx);
         }
         
@@ -185,24 +185,24 @@ void gui(struct nk_context* ctx) {
         nk_layout_row_static(ctx, wnkheight/20, wnkwidth/6, 1);
         
         nk_layout_row_dynamic(ctx, wnkheight/20, 2);
-        nk_label(ctx, "Линейная скорость х", NK_TEXT_CENTERED);
+        nk_label(ctx, "Linear speed x", NK_TEXT_CENTERED);
         nk_edit_string(ctx, NK_EDIT_BOX, mesbuf_1, &meslen_1, 512, nk_filter_default);
         nk_layout_row_dynamic(ctx, wnkheight/20, 2);
-        nk_label(ctx, "Линейная скорость y", NK_TEXT_CENTERED);
+        nk_label(ctx, "Linear speed y", NK_TEXT_CENTERED);
         nk_edit_string(ctx, NK_EDIT_BOX, mesbuf_2, &meslen_2, 512, nk_filter_default);
         nk_layout_row_dynamic(ctx, wnkheight/20, 2);
-        nk_label(ctx, "Угловая скорость z", NK_TEXT_CENTERED);
+        nk_label(ctx, "Angle speed z", NK_TEXT_CENTERED);
         nk_edit_string(ctx, NK_EDIT_BOX, mesbuf_3, &meslen_3, 512, nk_filter_default);
         
         //Кнопки на сжатие-разжатие клешни
         
         nk_label(ctx, "", NK_TEXT_CENTERED);
         nk_layout_row_dynamic(ctx, 20, 5);
-        nk_button_label(ctx, "Сжать клешню");
+        nk_button_label(ctx, "Squeeze claw");
         nk_label(ctx,"", NK_TEXT_CENTERED);
         nk_label(ctx,"", NK_TEXT_CENTERED);
         nk_label(ctx,"", NK_TEXT_CENTERED);
-        nk_button_label(ctx, "Разжать клешню");
+        nk_button_label(ctx, "Unclench claw");
         
         nk_label(ctx, "", NK_TEXT_CENTERED);
         
@@ -214,19 +214,19 @@ void gui(struct nk_context* ctx) {
         nk_layout_row_static(ctx, wnkheight/20, wnkwidth/6, 1); 
         
         nk_layout_row_dynamic(ctx, wnkheight/20, 2);
-        nk_label(ctx, "Ось 1", NK_TEXT_CENTERED);
+        nk_label(ctx, "Axis 1", NK_TEXT_CENTERED);
         nk_edit_string(ctx, NK_EDIT_BOX, mesbuf_hand_1, &meslen_hand_1, 512, nk_filter_default);
         nk_layout_row_dynamic(ctx, wnkheight/20, 2);
-        nk_label(ctx, "Ось 2", NK_TEXT_CENTERED);
+        nk_label(ctx, "Axis 2", NK_TEXT_CENTERED);
         nk_edit_string(ctx, NK_EDIT_BOX, mesbuf_hand_2, &meslen_hand_2, 512, nk_filter_default);
         nk_layout_row_dynamic(ctx, wnkheight/20, 2);
-        nk_label(ctx, "Ось 3", NK_TEXT_CENTERED);
+        nk_label(ctx, "Axis 3", NK_TEXT_CENTERED);
         nk_edit_string(ctx, NK_EDIT_BOX, mesbuf_hand_3, &meslen_hand_3, 512, nk_filter_default);
         nk_layout_row_dynamic(ctx, wnkheight/20, 2);
-        nk_label(ctx, "Ось 4", NK_TEXT_CENTERED);
+        nk_label(ctx, "Axis 4", NK_TEXT_CENTERED);
         nk_edit_string(ctx, NK_EDIT_BOX, mesbuf_hand_4, &meslen_hand_4, 512, nk_filter_default);
         nk_layout_row_dynamic(ctx, wnkheight/20, 2);
-        nk_label(ctx, "Ось 5", NK_TEXT_CENTERED);
+        nk_label(ctx, "Axis 5", NK_TEXT_CENTERED);
         nk_edit_string(ctx, NK_EDIT_BOX, mesbuf_hand_5, &meslen_hand_5, 512, nk_filter_default);
         
         nk_end(ctx);

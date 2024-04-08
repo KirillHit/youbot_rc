@@ -7,8 +7,8 @@
 
 #include <X11/Xutil.h>         
 
-#include "gui.h"    
-#include "error.h"   
+#include "youbot_rc/gui.h"    
+#include "youbot_rc/error.h"   
 
 extern struct XWindow xw;
 

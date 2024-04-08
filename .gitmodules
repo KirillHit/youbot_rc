@@ -1,0 +1,3 @@
+[submodule "lib/simple_socket"]
+	path = lib/simple_socket
+	url = https://github.com/KirillHit/simple_socket.git
