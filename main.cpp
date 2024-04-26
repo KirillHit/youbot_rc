@@ -35,7 +35,9 @@ int main(int argc, char *argv[])
     QLineEdit *lineEdit_3 = new QLineEdit();
 
     QPushButton *button_1 = new QPushButton("Squeeze claw", &window);
+    button_1 -> setFixedSize(100, 30);
     QPushButton *button_2 = new QPushButton("Unclench claw", &window);
+    button_2 -> setFixedSize(100, 30);
 
     QLabel *label_info = new QLabel("Управление рукой");
 
