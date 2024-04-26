@@ -7,6 +7,7 @@
 #include <QTextEdit>
 #include <QLabel>
 #include <QFormLayout>
+#include <QScreen>
 
 int main(int argc, char *argv[])
 {
@@ -14,6 +15,11 @@ int main(int argc, char *argv[])
 
     QWidget window;
     window.setWindowTitle("ЁБОТ");
+
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect screenGeometry = screen->geometry();
+
+    window.setGeometry(screenGeometry.width() * 0.25, screenGeometry.height() * 0.25, screenGeometry.width() * 0.5, screenGeometry.height() * 0.5);
 
     QPalette pal = window.palette();
     pal.setColor(QPalette::Window, Qt::white);
