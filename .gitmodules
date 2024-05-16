@@ -1,3 +1,3 @@
-[submodule "lib/simple_socket"]
-	path = lib/simple_socket
-	url = https://github.com/KirillHit/simple_socket.git
+[submodule "ControlApp/lib/simple_socket"]
+	path = ControlApp/lib/simple_socket
+	url = git@github.com:KirillHit/simple_socket.git
