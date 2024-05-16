@@ -14,8 +14,8 @@
    <string>Youbot Remote Control</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../../../Desktop/logo1.jpg</normaloff>../../../Desktop/logo1.jpg</iconset>
+   <iconset resource="icons.qrc">
+    <normaloff>:/main/icons/logo.jpg</normaloff>:/main/icons/logo.jpg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -599,6 +599,8 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

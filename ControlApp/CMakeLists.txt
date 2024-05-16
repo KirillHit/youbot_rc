@@ -32,6 +32,7 @@ if(ANDROID)
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    icons.qrc
   )
 else()
   add_executable(ControlApp
@@ -39,6 +40,7 @@ else()
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    icons.qrc
   )
 endif()
 
