@@ -10,6 +10,7 @@
 #include <QKeyEvent>
 #include <QIntValidator>
 #include <QMessageBox>
+#include <QTimer>
 
 #include "net_protocol.h"
 
@@ -26,29 +27,35 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-//public slots:
-    
-
 protected:
     void keyPressEvent(QKeyEvent *keyEvent) override;
     void keyReleaseEvent(QKeyEvent *keyEvent) override;
-    //void closeEvent (QCloseEvent *event) override;
 
     void pressBut(QPushButton* button);
     void releasBut(QPushButton* button);
     void buttonInit();
     void buttonHandle();
+    void buttonRandHandle();
 
-    void ui_validator();
+    void sliderInit();
+    void sliderHandle(int value);
+    bool sliderKeyHandle(QKeyEvent *keyEvent);
+
+    void uiValidator();
 
     void requestNewConnection();
+    void sendTcp();
     void displayNetError(QAbstractSocket::SocketError socketError);
+    void disconnectedHandle();
 
 private:
     Ui::MainWindow *ui;
     QTcpSocket *tcpSocket = nullptr;
+    QTimer *tcpResendTimer = nullptr;
 
-    Msg tx_msg;
+    YoubotMsg txMsg;
+    const int resendTime = 1000; // ms
+    const int sliderShortkeyStep = 2;
 };
 
 #endif // MAINWINDOW_H
