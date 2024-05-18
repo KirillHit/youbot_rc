@@ -41,7 +41,7 @@
         <item>
          <layout class="QGridLayout" name="gridLayout">
           <item row="2" column="2">
-           <widget class="QPushButton" name="but_right_back">
+           <widget class="QPushButton" name="butRightBack">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -62,7 +62,7 @@
            </widget>
           </item>
           <item row="1" column="2">
-           <widget class="QPushButton" name="but_right">
+           <widget class="QPushButton" name="butRight">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -83,7 +83,7 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QPushButton" name="but_back">
+           <widget class="QPushButton" name="butBack">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -104,7 +104,7 @@
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QPushButton" name="but_left_forward">
+           <widget class="QPushButton" name="butLeftForward">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -131,7 +131,7 @@
            </widget>
           </item>
           <item row="0" column="2">
-           <widget class="QPushButton" name="but_right_forward">
+           <widget class="QPushButton" name="butRightForward">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -149,7 +149,7 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QPushButton" name="but_left">
+           <widget class="QPushButton" name="butLeft">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -167,7 +167,7 @@
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QPushButton" name="but_left_back">
+           <widget class="QPushButton" name="butLeftBack">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -188,7 +188,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QPushButton" name="but_forward">
+           <widget class="QPushButton" name="butForward">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -206,7 +206,7 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QPushButton" name="but_stop">
+           <widget class="QPushButton" name="butStop">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -227,7 +227,7 @@
            </widget>
           </item>
           <item row="3" column="0">
-           <widget class="QPushButton" name="but_rot_left">
+           <widget class="QPushButton" name="butRotLeft">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -248,7 +248,7 @@
            </widget>
           </item>
           <item row="3" column="2">
-           <widget class="QPushButton" name="but_rot_right">
+           <widget class="QPushButton" name="butRotRight">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -266,7 +266,7 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QPushButton" name="but_random_move">
+           <widget class="QPushButton" name="butRandomMove">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -315,10 +315,10 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="lineIp"/>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_9">
+         <widget class="QPushButton" name="butConnect">
           <property name="font">
            <font>
             <pointsize>13</pointsize>
@@ -356,36 +356,15 @@
         </item>
         <item>
          <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0">
-          <item row="0" column="1">
-           <widget class="QSlider" name="horizontalSlider_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_10">
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_8">
             <property name="font">
              <font>
               <pointsize>13</pointsize>
              </font>
             </property>
             <property name="text">
-             <string>axis 5</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QSlider" name="horizontalSlider_5">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QSlider" name="horizontalSlider_6">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <string>axis 3</string>
             </property>
            </widget>
           </item>
@@ -401,18 +380,6 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_9">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>axis 4</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_7">
             <property name="font">
@@ -425,29 +392,127 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_8">
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-             </font>
+          <item row="3" column="1">
+           <widget class="QSlider" name="sliderAxis4">
+            <property name="minimum">
+             <number>-500</number>
             </property>
-            <property name="text">
-             <string>axis 3</string>
+            <property name="maximum">
+             <number>500</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSlider" name="sliderAxis3">
+            <property name="minimum">
+             <number>-500</number>
+            </property>
+            <property name="maximum">
+             <number>500</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QSlider" name="horizontalSlider_4">
+           <widget class="QSlider" name="sliderAxis2">
+            <property name="minimum">
+             <number>-500</number>
+            </property>
+            <property name="maximum">
+             <number>500</number>
+            </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QSlider" name="horizontalSlider_7">
+           <widget class="QSlider" name="sliderAxis5">
+            <property name="minimum">
+             <number>-500</number>
+            </property>
+            <property name="maximum">
+             <number>500</number>
+            </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>axis 4</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>axis 5</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSlider" name="sliderAxis1">
+            <property name="minimum">
+             <number>-500</number>
+            </property>
+            <property name="maximum">
+             <number>500</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="labelAxis1">
+            <property name="text">
+             <string>0.00</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="labelAxis2">
+            <property name="text">
+             <string>0.00</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLabel" name="labelAxis3">
+            <property name="text">
+             <string>0.00</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLabel" name="labelAxis4">
+            <property name="text">
+             <string>0.00</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLabel" name="labelAxis5">
+            <property name="text">
+             <string>0.00</string>
             </property>
            </widget>
           </item>
@@ -481,7 +546,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QPushButton" name="pushButton_7">
+           <widget class="QPushButton" name="butCompress">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>
@@ -499,7 +564,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_8">
+           <widget class="QPushButton" name="butOpen">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>
@@ -545,15 +610,28 @@
         </item>
         <item>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="1">
-           <widget class="QSlider" name="horizontalSlider">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+          <item row="1" column="2">
+           <widget class="QLabel" name="lableAngVel">
+            <property name="text">
+             <string>0.00</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QSlider" name="horizontalSlider_2">
+          <item row="0" column="2">
+           <widget class="QLabel" name="labelLinVel">
+            <property name="text">
+             <string>0.00</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSlider" name="sliderLinVel">
+            <property name="maximum">
+             <number>300</number>
+            </property>
+            <property name="value">
+             <number>100</number>
+            </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -580,6 +658,22 @@
             </property>
             <property name="text">
              <string>Linear speed</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSlider" name="sliderAngVel">
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>300</number>
+            </property>
+            <property name="value">
+             <number>100</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>

@@ -25,12 +25,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #endif()
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Network REQUIRED)
 
 if(ANDROID)
   add_library(ControlApp SHARED
     main.cpp
     mainwindow.cpp
     mainwindow.h
+    net_protocol.h
     mainwindow.ui
     icons.qrc
   )
@@ -39,9 +41,10 @@ else()
     main.cpp
     mainwindow.cpp
     mainwindow.h
+    net_protocol.h
     mainwindow.ui
     icons.qrc
   )
 endif()
 
-target_link_libraries(ControlApp PRIVATE Qt5::Widgets)
+target_link_libraries(ControlApp PRIVATE Qt5::Widgets Qt5::Network)
