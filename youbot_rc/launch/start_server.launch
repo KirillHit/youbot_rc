@@ -1,0 +1,3 @@
+<launch> 
+    <node name="youbot_rc_node" pkg="youbot_rc" type="youbot_rc_node" output="screen"/>
+</launch>

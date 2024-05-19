@@ -1,0 +1,6 @@
+[submodule "youbot_driver_ros_interface"]
+	path = youbot_driver_ros_interface
+	url = https://github.com/youbot/youbot_driver_ros_interface.git
+[submodule "youbot_rc/lib/simple_socket"]
+	path = youbot_rc/lib/simple_socket
+	url = https://github.com/KirillHit/simple_socket.git
