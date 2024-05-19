@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(tcpResendTimer, &QTimer::timeout, this, &MainWindow::sendTcp);
     tcpResendTimer->start(resendTime);
 
-    connect(tcpSocket, &QAbstractSocket::errorOccurred, this, &MainWindow::displayNetError);
+    connect(tcpSocket, &QAbstractSocket::errorOccurred, this, &MainWindow::displayNetError); // TODO
     connect(tcpSocket, &QAbstractSocket::disconnected, this, &MainWindow::disconnectedHandle);
 }
 
@@ -31,11 +31,11 @@ void MainWindow::sliderInit()
     ui->labelAxis4->setText(QString::number(ui->sliderAxis4->value() / 100.0, 'f', 2));
     ui->labelAxis5->setText(QString::number(ui->sliderAxis5->value() / 100.0, 'f', 2));
 
-    txMsg.axis1 = ui->sliderAxis1->value();
-    txMsg.axis2 = ui->sliderAxis2->value();
-    txMsg.axis3 = ui->sliderAxis3->value();
-    txMsg.axis4 = ui->sliderAxis4->value();
-    txMsg.axis5 = ui->sliderAxis5->value();
+    txMsg.axis[0] = ui->sliderAxis1->value();
+    txMsg.axis[1] = ui->sliderAxis2->value();
+    txMsg.axis[2] = ui->sliderAxis3->value();
+    txMsg.axis[3] = ui->sliderAxis4->value();
+    txMsg.axis[4] = ui->sliderAxis5->value();
 
     connect(ui->sliderLinVel, &QAbstractSlider::valueChanged, this, &MainWindow::sliderHandle);
     connect(ui->sliderAngVel, &QAbstractSlider::valueChanged, this, &MainWindow::sliderHandle);
@@ -57,19 +57,19 @@ void MainWindow::sliderHandle(int value)
         ui->lableAngVel->setText(QString::number(value / 100.0, 'f', 2));
     } else if (pObject == ui->sliderAxis1) {
         ui->labelAxis1->setText(QString::number(value / 100.0, 'f', 2));
-        txMsg.axis1 = value;
+        txMsg.axis[0] = value;
     } else if (pObject == ui->sliderAxis2) {
         ui->labelAxis2->setText(QString::number(value / 100.0, 'f', 2));
-        txMsg.axis2 = value;
+        txMsg.axis[0] = value;
     } else if (pObject == ui->sliderAxis3) {
         ui->labelAxis3->setText(QString::number(value / 100.0, 'f', 2));
-        txMsg.axis3 = value;
+        txMsg.axis[0] = value;
     } else if (pObject == ui->sliderAxis4) {
         ui->labelAxis4->setText(QString::number(value / 100.0, 'f', 2));
-        txMsg.axis4 = value;
+        txMsg.axis[0] = value;
     } else if (pObject == ui->sliderAxis5) {
         ui->labelAxis5->setText(QString::number(value / 100.0, 'f', 2));
-        txMsg.axis5 = value;
+        txMsg.axis[0] = value;
     }
 
     sendTcp();
@@ -190,15 +190,21 @@ void MainWindow::buttonHandle()
     double lin_vel = ui->sliderLinVel->value();
     double ang_vel = ui->sliderAngVel->value();
 
-    txMsg.x_vel = lin_vel * 
+    if (ui->butStop->isDown()) {
+        txMsg.x_vel = 0;
+        txMsg.y_vel = 0;
+        txMsg.ang_speed = 0;
+    } else {
+        txMsg.x_vel = lin_vel * 
         (static_cast<int>(ui->butForward->isDown() || ui->butLeftForward->isDown() || ui->butRightForward->isDown())
         - static_cast<int>(ui->butBack->isDown() || ui->butLeftBack->isDown() || ui->butRightBack->isDown()));
-    
-    txMsg.y_vel = ang_vel *
-        (static_cast<int>(ui->butLeft->isDown() || ui->butLeftBack->isDown() || ui->butLeftForward->isDown())
-        - static_cast<int>(ui->butRight->isDown() || ui->butRightBack->isDown() || ui->butRightForward->isDown()));
+        
+        txMsg.y_vel = ang_vel *
+            (static_cast<int>(ui->butLeft->isDown() || ui->butLeftBack->isDown() || ui->butLeftForward->isDown())
+            - static_cast<int>(ui->butRight->isDown() || ui->butRightBack->isDown() || ui->butRightForward->isDown()));
 
-    txMsg.ang_speed = ang_vel * (static_cast<int>(ui->butRotLeft->isDown()) - static_cast<int>(ui->butRotRight->isDown()));
+        txMsg.ang_speed = ang_vel * (static_cast<int>(ui->butRotLeft->isDown()) - static_cast<int>(ui->butRotRight->isDown()));
+    }
 
     if (ui->butOpen->isDown()) {
         txMsg.grip_cmd = GripControl::OPEN;
@@ -273,8 +279,7 @@ void MainWindow::keyPressEvent(QKeyEvent *keyEvent)
         break;
     case Qt::Key_S:
         pressBut(ui->butStop);
-        break;    
-    qInfo() << ui->butLeftForward->isDown();
+        break;
     case Qt::Key_D:
         pressBut(ui->butRight);
         break;

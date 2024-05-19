@@ -373,7 +373,7 @@
              </font>
             </property>
             <property name="text">
-             <string>axis 3</string>
+             <string>Joint 3</string>
             </property>
            </widget>
           </item>
@@ -385,7 +385,7 @@
              </font>
             </property>
             <property name="text">
-             <string>axis 1</string>
+             <string>Joint 1</string>
             </property>
            </widget>
           </item>
@@ -397,7 +397,7 @@
              </font>
             </property>
             <property name="text">
-             <string>axis 2</string>
+             <string>Joint 2</string>
             </property>
            </widget>
           </item>
@@ -461,7 +461,7 @@
              </font>
             </property>
             <property name="text">
-             <string>axis 4</string>
+             <string>Joint 4</string>
             </property>
            </widget>
           </item>
@@ -473,7 +473,7 @@
              </font>
             </property>
             <property name="text">
-             <string>axis 5</string>
+             <string>Joint 5</string>
             </property>
            </widget>
           </item>
