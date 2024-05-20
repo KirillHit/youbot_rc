@@ -9,8 +9,8 @@
 YoubotServer::YoubotServer()
 {   
     cmdVelPub = nh.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
-    //armPosPub = n.advertise<brics_actuator::JointPositions > ("arm_1/arm_controller/position_command", 1);
-	//gripperPosPub = n.advertise<brics_actuator::JointPositions > ("arm_1/gripper_controller/position_command", 1);
+    armPosPub = nh.advertise<brics_actuator::JointPositions > ("arm_1/arm_controller/position_command", 1);
+	gripperPosPub = nh.advertise<brics_actuator::JointPositions > ("arm_1/gripper_controller/position_command", 1);
 
     int port;
     nh.getParam("youbot_rc_node/port", port);
@@ -48,63 +48,57 @@ void YoubotServer::pub_cmdvel(double x, double y, double angle)
 
 void YoubotServer::pub_arm_joint()
 {    
-    /*
     brics_actuator::JointPositions command;
 
-    vector <brics_actuator::JointValue> arm_joint_positions;
+    std::vector <brics_actuator::JointValue> arm_joint_positions;
     arm_joint_positions.resize(5);
 
     for (int idx = 0; idx < 5; ++idx) 
     {
-        armJointPositions[i].joint_uri = std::string("arm_joint_")+ std::to_string(idx + 1);
-        armJointPositions[i].value = rxMsg.axis[idx] / 100.0;
-        armJointPositions[i].unit = boost::units::to_string(boost::units::si::radians);
+        arm_joint_positions[idx].joint_uri = std::string("arm_joint_")+ std::to_string(idx + 1);
+        arm_joint_positions[idx].value = rxMsg.axis[idx] / 100.0;
+        arm_joint_positions[idx].unit = boost::units::to_string(boost::units::si::radians);
     };
 
     command.positions = arm_joint_positions;
     armPosPub.publish(command);
-    */
 }
 
 
 void YoubotServer::pub_gripper_joint()
-{
-    double new_gripper_pos = 0;
-    
+{   
     switch (rxMsg.grip_cmd)
     {
     case GripControl::WAIT:
-        new_gripper_pos = gripperPosition;
+        return;
         break;
     case GripControl::COMPRESS:
-        new_gripper_pos = gripperPosition - gripperSpeed;
+        gripperPosition -= gripperSpeed;
         break;
     case GripControl::OPEN:
-        new_gripper_pos = gripperPosition + gripperSpeed;
+        gripperPosition += gripperSpeed;
         break;
     default:
         break;
     }
 
-    std::min(new_gripper_pos, 0.0);
-    std::max(new_gripper_pos, 2.0);
+    gripperPosition = std::max(gripperPosition, 0.0);
+    gripperPosition = std::min(gripperPosition, 0.0115);
 
-    /*
     brics_actuator::JointPositions command;
     std::vector<brics_actuator::JointValue> gripper_joint_positions;
-    gripperJointPositions.resize(2);
+    gripper_joint_positions.resize(2);
 
-    gripperJointPositions[0].joint_uri = "gripper_finger_joint_l";
-    gripperJointPositions[0].value = readValue;
-    gripperJointPositions[0].unit = boost::units::to_string(boost::units::si::meter);
+    gripper_joint_positions[0].joint_uri = "gripper_finger_joint_l";
+    gripper_joint_positions[0].value = gripperPosition;
+    gripper_joint_positions[0].unit = boost::units::to_string(boost::units::si::meter);
 
-    gripperJointPositions[1].joint_uri = "gripper_finger_joint_r";
-    gripperJointPositions[1].value = readValue;
-    gripperJointPositions[1].unit = boost::units::to_string(boost::units::si::meter);
+    gripper_joint_positions[1].joint_uri = "gripper_finger_joint_r";
+    gripper_joint_positions[1].value = gripperPosition;
+    gripper_joint_positions[1].unit = boost::units::to_string(boost::units::si::meter);
 
-    command.positions = gripperJointPositions;
+    command.positions = gripper_joint_positions;
     gripperPosPub.publish(command);
-    */
 }
 
 
@@ -161,10 +155,7 @@ void YoubotServer::update_state()
         state_changed = true;
     }
 
-    if (rxMsg.grip_cmd != youbotState.grip_cmd) {
-        pub_gripper_joint();
-        state_changed = true;
-    }
+    pub_gripper_joint();
 
     if (state_changed) youbotState = rxMsg;
 }

@@ -5,9 +5,10 @@
 #include <ros/console.h>
 #include <cstddef>
 #include <vector>
+#include <iostream>
 
 #include <geometry_msgs/Twist.h>
-// #include <brics_actuator/JointPositions.h>
+#include <brics_actuator/JointPositions.h>
 
 #include "simple_socket/simple_socket.hpp"
 #include "net_protocol.hpp"
@@ -41,7 +42,7 @@ private:
     YoubotMsg youbotState;
 
     double gripperPosition = 0;
-    double gripperSpeed = 0.1;
+    double gripperSpeed = 0.002;
 };
 
 
