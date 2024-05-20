@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/main">
         <file>icons/logo.jpg</file>
+        <file>icons/confusion-vector.png</file>
     </qresource>
 </RCC>

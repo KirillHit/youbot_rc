@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(tcpResendTimer, &QTimer::timeout, this, &MainWindow::sendTcp);
     tcpResendTimer->start(resendTime);
 
-    connect(tcpSocket, &QAbstractSocket::errorOccurred, this, &MainWindow::displayNetError); // TODO
+    connect(tcpSocket, &QAbstractSocket::errorOccurred, this, &MainWindow::displayNetError);
     connect(tcpSocket, &QAbstractSocket::disconnected, this, &MainWindow::disconnectedHandle);
 }
 
@@ -191,29 +191,35 @@ void MainWindow::uiValidator()
 
 void MainWindow::buttonRandHandle()
 {
-    // TODO
+    int lin_vel = ui->sliderLinVel->value();
+    int and_vel = ui->sliderAngVel ->value();
+    
+    txMsg.x_vel = QRandomGenerator::global()->bounded(-lin_vel, lin_vel);
+    txMsg.y_vel = QRandomGenerator::global()->bounded(-lin_vel, lin_vel);
+    txMsg.ang_speed = QRandomGenerator::global()->bounded(-and_vel, and_vel);
+    
+    sendTcp();
+    tcpResendTimer->start(resendTime);
 }
 
 
 void MainWindow::buttonHandle()
 {
-    double lin_vel = ui->sliderLinVel->value();
-    double ang_vel = ui->sliderAngVel->value();
-
     if (ui->butStop->isDown()) {
         txMsg.x_vel = 0;
         txMsg.y_vel = 0;
         txMsg.ang_speed = 0;
     } else {
-        txMsg.x_vel = lin_vel * 
-        (static_cast<int>(ui->butForward->isDown() || ui->butLeftForward->isDown() || ui->butRightForward->isDown())
+        txMsg.x_vel = ui->sliderLinVel->value() 
+        * (static_cast<int>(ui->butForward->isDown() || ui->butLeftForward->isDown() || ui->butRightForward->isDown())
         - static_cast<int>(ui->butBack->isDown() || ui->butLeftBack->isDown() || ui->butRightBack->isDown()));
         
-        txMsg.y_vel = ang_vel *
-            (static_cast<int>(ui->butLeft->isDown() || ui->butLeftBack->isDown() || ui->butLeftForward->isDown())
+        txMsg.y_vel = ui->sliderLinVel->value()
+            * (static_cast<int>(ui->butLeft->isDown() || ui->butLeftBack->isDown() || ui->butLeftForward->isDown())
             - static_cast<int>(ui->butRight->isDown() || ui->butRightBack->isDown() || ui->butRightForward->isDown()));
 
-        txMsg.ang_speed = ang_vel * (static_cast<int>(ui->butRotLeft->isDown()) - static_cast<int>(ui->butRotRight->isDown()));
+        txMsg.ang_speed = ui->sliderAngVel->value()
+            * (static_cast<int>(ui->butRotLeft->isDown()) - static_cast<int>(ui->butRotRight->isDown()));
     }
 
     if (ui->butOpen->isDown()) {
@@ -231,26 +237,24 @@ void MainWindow::buttonHandle()
 
 bool MainWindow::sliderKeyHandle(QKeyEvent *keyEvent)
 {
-    Qt::Key key = (Qt::Key)keyEvent->key();
+    int controlModifier = (keyEvent->modifiers() == Qt::ControlModifier) ? -1 : 1;
 
-    int shiftModifier = (keyEvent->modifiers() == Qt::ShiftModifier) ? -1 : 1;
-
-    switch (keyEvent->nativeVirtualKey())
+    switch (keyEvent->key())
     {
     case Qt::Key_1:
-        ui->sliderAxis1-> setValue(ui->sliderAxis1->value() + sliderShortkeyStep * shiftModifier);
+        ui->sliderAxis1-> setValue(ui->sliderAxis1->value() + sliderShortkeyStep * controlModifier);
         break;
     case Qt::Key_2:
-        ui->sliderAxis2-> setValue(ui->sliderAxis2->value() + sliderShortkeyStep * shiftModifier);
+        ui->sliderAxis2-> setValue(ui->sliderAxis2->value() + sliderShortkeyStep * controlModifier);
         break;
     case Qt::Key_3:
-        ui->sliderAxis3-> setValue(ui->sliderAxis3->value() + sliderShortkeyStep * shiftModifier);
+        ui->sliderAxis3-> setValue(ui->sliderAxis3->value() + sliderShortkeyStep * controlModifier);
         break;
     case Qt::Key_4:
-        ui->sliderAxis4-> setValue(ui->sliderAxis4->value() + sliderShortkeyStep * shiftModifier);
+        ui->sliderAxis4-> setValue(ui->sliderAxis4->value() + sliderShortkeyStep * controlModifier);
         break;
     case Qt::Key_5:
-        ui->sliderAxis5-> setValue(ui->sliderAxis5->value() + sliderShortkeyStep * shiftModifier);
+        ui->sliderAxis5-> setValue(ui->sliderAxis5->value() + sliderShortkeyStep * controlModifier);
         break;
     default:
         return false;
@@ -273,7 +277,7 @@ void MainWindow::keyPressEvent(QKeyEvent *keyEvent)
         return;
     }
 
-    switch (keyEvent->nativeVirtualKey())
+    switch (keyEvent->key())
     {
     case Qt::Key_Q:
         pressBut(ui->butLeftForward);
@@ -337,7 +341,7 @@ void MainWindow::keyReleaseEvent(QKeyEvent *keyEvent)
         return;
     }
 
-    switch (keyEvent->nativeVirtualKey())
+    switch (keyEvent->key())
     {
     case Qt::Key_Q:
         releasBut(ui->butLeftForward);

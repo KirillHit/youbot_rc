@@ -4,13 +4,13 @@
 #include <QMainWindow>
 #include <QLineEdit>
 #include <QPushButton>
-#include <QShortcut>
 #include <QDebug>
 #include <QTcpSocket>
 #include <QKeyEvent>
 #include <QIntValidator>
 #include <QMessageBox>
 #include <QTimer>
+#include <QRandomGenerator>
 
 #include "net_protocol.h"
 

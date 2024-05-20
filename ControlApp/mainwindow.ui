@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>858</width>
-    <height>431</height>
+    <height>566</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -279,7 +279,17 @@
              </font>
             </property>
             <property name="text">
-             <string extracomment="Random move">↜</string>
+             <string extracomment="Random move"/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons.qrc">
+              <normaloff>:/main/icons/confusion-vector.png</normaloff>:/main/icons/confusion-vector.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>60</width>
+              <height>60</height>
+             </size>
             </property>
            </widget>
           </item>
