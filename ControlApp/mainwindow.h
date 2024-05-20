@@ -44,6 +44,7 @@ protected:
     void uiValidator();
 
     void requestNewConnection();
+    void disconnect();
     void sendTcp();
     void displayNetError(QAbstractSocket::SocketError socketError);
     void disconnectedHandle();

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>858</width>
-    <height>562</height>
+    <height>431</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -315,28 +315,72 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineIp">
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>127.0.0.1</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="2,0,1">
+          <item>
+           <widget class="QLineEdit" name="lineIp">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>127.0.0.1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_14">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string> : </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="linePort">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>10001</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="butConnect">
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Сonnect</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QPushButton" name="butConnect">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Сonnect</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="butDisconnect">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Disconnect</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="Line" name="line_3">

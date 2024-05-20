@@ -3,9 +3,8 @@
 
 
 #include <cstdint>
+#include <cstddef>
 
-
-const uint16_t YOUBOT_PORT = 10001;
 
 enum class GripControl : uint8_t {WAIT, COMPRESS, OPEN};
 

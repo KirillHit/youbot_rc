@@ -81,7 +81,14 @@ void MainWindow::requestNewConnection()
 {
     ui->butConnect->setEnabled(false);
     tcpSocket->abort();
-    tcpSocket->connectToHost(ui->lineIp->text(), YOUBOT_PORT);
+    tcpSocket->connectToHost(ui->lineIp->text(), ui->linePort->text().toInt());
+}
+
+
+void MainWindow::disconnect()
+{
+    tcpSocket->abort();
+    ui->butConnect->setEnabled(true);
 }
 
 
@@ -124,8 +131,8 @@ void MainWindow::displayNetError(QAbstractSocket::SocketError socketError)
 
 void MainWindow::disconnectedHandle()
 {
-    QMessageBox::warning(this, tr("Tcp Client"),
-                                tr("Сonnection was lost."));
+    /* QMessageBox::warning(this, tr("Tcp Client"),
+                                tr("Сonnection was lost.")); */
 
     ui->butConnect->setEnabled(true);
 }
@@ -134,6 +141,7 @@ void MainWindow::disconnectedHandle()
 void MainWindow::buttonInit()
 {
     connect(ui->butConnect, &QPushButton::pressed, this, &MainWindow::requestNewConnection);
+    connect(ui->butDisconnect, &QPushButton::pressed, this, &MainWindow::disconnect);
     
     connect(ui->butLeftForward, &QPushButton::pressed, this, &MainWindow::buttonHandle);
     connect(ui->butLeftForward, &QPushButton::released, this, &MainWindow::buttonHandle);
@@ -176,6 +184,8 @@ void MainWindow::uiValidator()
                                + "(\\." + IpRange + ")$");
     QRegularExpressionValidator *ipValidator = new QRegularExpressionValidator(IpRegex, this);
     ui->lineIp->setValidator(ipValidator);
+
+    ui->linePort->setValidator(new QIntValidator(1024, 65535, this));
 }
 
 
