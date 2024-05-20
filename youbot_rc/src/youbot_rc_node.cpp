@@ -12,14 +12,16 @@ YoubotServer::YoubotServer()
     //armPosPub = n.advertise<brics_actuator::JointPositions > ("arm_1/arm_controller/position_command", 1);
 	//gripperPosPub = n.advertise<brics_actuator::JointPositions > ("arm_1/gripper_controller/position_command", 1);
 
-    tcpServer.set_socket("", 10001); // TODO ip
+    int port;
+    nh.getParam("youbot_rc_node/port", port);
+    tcpServer.set_socket("", port);
     tcpServer.set_keepalive(1, 1, 1);
     if(tcpServer.socket_bind() < 0) {
-        std::cout << "Bind error" << std::endl;
+        ROS_ERROR("Bind error. Try changing the port, wait a few minutes or reboot.");
         ros::shutdown();
     }
 
-    std::cout << "Init success!" << std::endl;
+    ROS_INFO("Init success!");
 }
 
 
@@ -108,36 +110,32 @@ void YoubotServer::pub_gripper_joint()
 
 void YoubotServer::connect()
 {
-    std::cout << "Waint connection" << std::endl;
+    ROS_INFO("Waint connection");
 
     int res = tcpServer.socket_listen();
 
     if(res < 0) {
-        std::cout << "Client connection error! Code: " << res << std::endl;
+        ROS_WARN("Client connection error! Code: %d", res);
         return;
     }
 
     isConnected = true;
 
-    std::cout << "Connected" << std::endl;
+    ROS_INFO("Connected");
 }
 
 
 int YoubotServer::receive_command()
 {
     if (tcpServer.receive(reinterpret_cast<char*>(&rxMsg), YOUBOT_MSG_SIZE) < 0) {
-        std::cout << "Receive error!" << std::endl;
+        ROS_WARN("Receive error!");
         return -1;
-    } 
-    
-    /* for (const char& i: rx_buffer_)
-        std::cout << std::hex << (int) static_cast<uint8_t>(i) << " ";
-    std::cout << std::dec << std::endl; */
+    }
 
     update_state();
 
-    if (tcpServer.send_mes(reinterpret_cast<char*>(&rxMsg), YOUBOT_MSG_SIZE) < 0) {
-        std::cout << "Send error!" << std::endl;
+    if (tcpServer.send_mes(reinterpret_cast<char*>(&youbotState), YOUBOT_MSG_SIZE) < 0) {
+        ROS_WARN("Send error!");
         return -1;
     }
 
@@ -194,7 +192,7 @@ void YoubotServer::spin()
 
 int main(int argc, char * argv[])
 {
-    ros::init(argc, argv, "youbot_rc");
+    ros::init(argc, argv, "youbot_rc_node");
 
     YoubotServer youbot_server;
     youbot_server.spin();

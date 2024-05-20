@@ -5,8 +5,6 @@
 #include <cstddef>
 
 
-const uint16_t YOUBOT_PORT = 10000;
-
 enum class GripControl : uint8_t {WAIT, COMPRESS, OPEN};
 
 #pragma pack(push, 1)

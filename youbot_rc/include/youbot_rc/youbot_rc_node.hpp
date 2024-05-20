@@ -2,8 +2,8 @@
 #define YOUBOT_RC_NODE_HPP
 
 #include <ros/ros.h>
+#include <ros/console.h>
 #include <cstddef>
-#include <iostream>
 #include <vector>
 
 #include <geometry_msgs/Twist.h>

@@ -1,3 +1,7 @@
 <launch> 
-    <node name="youbot_rc_node" pkg="youbot_rc" type="youbot_rc_node" output="screen"/>
+    <arg name="port" default="10001" />
+    <node name="youbot_rc_node" pkg="youbot_rc" type="youbot_rc_node" output="screen">
+        <param name="port" type="int" value="$(arg port)" />
+    </node>
+
 </launch>
