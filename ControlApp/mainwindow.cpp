@@ -44,6 +44,14 @@ void MainWindow::sliderInit()
     connect(ui->sliderAxis3, &QAbstractSlider::valueChanged, this, &MainWindow::sliderHandle);
     connect(ui->sliderAxis4, &QAbstractSlider::valueChanged, this, &MainWindow::sliderHandle);
     connect(ui->sliderAxis5, &QAbstractSlider::valueChanged, this, &MainWindow::sliderHandle);
+
+    connect(ui->sliderLinVel, &QAbstractSlider::sliderReleased, this, &MainWindow::sendTcpComand);
+    connect(ui->sliderAngVel, &QAbstractSlider::sliderReleased, this, &MainWindow::sendTcpComand);
+    connect(ui->sliderAxis1, &QAbstractSlider::sliderReleased, this, &MainWindow::sendTcpComand);
+    connect(ui->sliderAxis2, &QAbstractSlider::sliderReleased, this, &MainWindow::sendTcpComand);
+    connect(ui->sliderAxis3, &QAbstractSlider::sliderReleased, this, &MainWindow::sendTcpComand);
+    connect(ui->sliderAxis4, &QAbstractSlider::sliderReleased, this, &MainWindow::sendTcpComand);
+    connect(ui->sliderAxis5, &QAbstractSlider::sliderReleased, this, &MainWindow::sendTcpComand);
 }
 
 
@@ -60,18 +68,22 @@ void MainWindow::sliderHandle(int value)
         txMsg.axis[0] = value;
     } else if (pObject == ui->sliderAxis2) {
         ui->labelAxis2->setText(QString::number(value / 100.0, 'f', 2));
-        txMsg.axis[0] = value;
+        txMsg.axis[1] = value;
     } else if (pObject == ui->sliderAxis3) {
         ui->labelAxis3->setText(QString::number(value / 100.0, 'f', 2));
-        txMsg.axis[0] = value;
+        txMsg.axis[2] = value;
     } else if (pObject == ui->sliderAxis4) {
         ui->labelAxis4->setText(QString::number(value / 100.0, 'f', 2));
-        txMsg.axis[0] = value;
+        txMsg.axis[3] = value;
     } else if (pObject == ui->sliderAxis5) {
         ui->labelAxis5->setText(QString::number(value / 100.0, 'f', 2));
-        txMsg.axis[0] = value;
+        txMsg.axis[4] = value;
     }
+}
 
+
+void MainWindow::sendTcpComand()
+{   
     sendTcp();
     tcpResendTimer->start(resendTime);
 }
@@ -384,6 +396,9 @@ void MainWindow::keyReleaseEvent(QKeyEvent *keyEvent)
         break;
     case Qt::Key_F:
         releasBut(ui->butOpen);
+        break;
+    case Qt::Key_1: case Qt::Key_2: case Qt::Key_3: case Qt::Key_4: case Qt::Key_5:
+        sendTcpComand();
         break;
     default:
         break;

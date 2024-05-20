@@ -48,6 +48,7 @@ protected:
     void sendTcp();
     void displayNetError(QAbstractSocket::SocketError socketError);
     void disconnectedHandle();
+    void sendTcpComand();
 
 private:
     Ui::MainWindow *ui;
@@ -55,7 +56,7 @@ private:
     QTimer *tcpResendTimer = nullptr;
 
     YoubotMsg txMsg;
-    const int resendTime = 1000; // ms
+    const int resendTime = 100; // ms
     const int sliderShortkeyStep = 2;
 };
 
