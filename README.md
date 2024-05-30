@@ -18,7 +18,7 @@ Control PC:
 
 ### Подготовка
 
-Информацию по настройки youbot можно найти [здесь](.docs\youbot_setup_instruction.pdf) или в репозитории [youbot](https://github.com/ut-ims-robotics/youbot/tree/kinetic).
+Информацию по настройки youbot можно найти [здесь](.docs/youbot_setup_instruction.pdf) или в репозитории [youbot](https://github.com/ut-ims-robotics/youbot/tree/kinetic).
 
 Перед запуском драйвера необходимо выдать разрешение для youbot_driver_ros_interface на использование сетевых устройств. Подробнее [здесь](http://www.youbot-store.com/wiki/index.php/Execute_as_a_root).
 
